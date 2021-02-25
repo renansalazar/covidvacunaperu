@@ -39,6 +39,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 5px;
+  transition: 400ms;
+}
+
+.footer a:hover{
+  color: var(--main-title-color);
 }
 
 .title a {

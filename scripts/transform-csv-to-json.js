@@ -20,8 +20,6 @@ module.exports = async function transformCsvToJson(csvFileName) {
     };
   });
 
-  console.log(json)
-
   let fechaCorte = json[0]["FECHA_CORTE"];
   let jsonStatus = [];
   let jsonHist = [];
@@ -47,7 +45,7 @@ module.exports = async function transformCsvToJson(csvFileName) {
         ({ departamento }) => departamento === objDepartamento
       );
       let indiceHist = jsonHist.findIndex(
-        ({ fechaResultado }) => fechaResultado === objFechaVacunacion
+        ({ fechaVacunacion }) => fechaVacunacion === objFechaVacunacion
       );
 
       if (indice < 0) {
@@ -78,7 +76,7 @@ module.exports = async function transformCsvToJson(csvFileName) {
 
       if (indiceHist < 0) {
         jsonHist.push({
-          fechaResultado: objFechaVacunacion,
+          fechaVacunacion: objFechaVacunacion,
           departamentos: [{ 
                             departamento: objDepartamento, 
                             primeraDosis: objDosis==="1" ? 1 : 0,
@@ -138,7 +136,7 @@ module.exports = async function transformCsvToJson(csvFileName) {
         return acc + cur.primeraDosis;
       }, 0);
       let totalSegundaDosis = element.departamentos.reduce((acc, cur) => {
-        return acc + cur.primeraDosis;
+        return acc + cur.segundaDosis;
       }, 0);
       jsonHist[i].departamentos.push({
         departamento: "TOTAL",

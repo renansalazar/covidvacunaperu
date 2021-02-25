@@ -84,7 +84,6 @@ const Table = ({ data }) => {
   );
 
   rows = [...rows.filter(row=>row.id!=='25'), ...rows.filter(row=>row.id=='25')]
-  console.log(rows)
   return (
     <div className={styles.container}>
       <table {...getTableProps()} className={styles.table}>
@@ -106,15 +105,15 @@ const Table = ({ data }) => {
           {
             rows.map((row, index)=>{
               prepareRow(row)
-              const className = row.id === indiceTotal ? styles.totals : ''
+              const className = row.id === indiceTotal ? styles.totals : styles.row
 
               return (
                 <tr {...row.getRowProps()} className={className} >
                   {
                     row.cells.map((cell, index)=>{
                       return (
-                        <td>
-                          <span key={index}>
+                        <td className={styles.cell}>
+                          <span key={index} className={index==0?styles.text:styles.number}>
                             {cell.column.format(cell.value)}
                           </span>
                         </td>

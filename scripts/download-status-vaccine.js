@@ -15,7 +15,7 @@ download(url, 'public/data', { filename })
     const json = await transformCsvToJson(filename)
     if(json.jsonStatus.length>0){
       await fs.writeJson(`./public/data/latest.json`, json.jsonStatus)
-      await fs.writeJson('./public/data/hist_vacuna.json', json.jsonHist)
+      await fs.writeJson('./public/data/histVacuna.json', json.jsonHist)
       await fs.writeJson('./public/data/ultimoCorte.json', { fechaCorte: json.fechaCorte, rows: json.registros })
     }
     await fs.unlink('public/data/'+filename, function (err) {

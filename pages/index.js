@@ -3,12 +3,18 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 import Progress from '../components/Progress'
+import ProgressChart from '../components/ProgressChart'
 import MapPeru from '../components/MapPeru'
 import Table from '../components/Table'
 import FormatNumber from '../components/FormatNumber'
 import FormatPercentage from '../components/FormatPercentage'
+import formatChartData from '../components/ProgressChart/utils/format-data.js'
+import {
+  PrimeraDosisTooltip,
+  SegundaDosisTooltip
+}  from '../components/ProgressChart/tooltips'
 
-export default function Home({data}) {
+export default function Home({data, hist}) {
   const totals = data.find(element=>element.departamento==='TOTAL')
   return (
     <div className={styles.container}>
@@ -100,6 +106,21 @@ export default function Home({data}) {
           <h2>Por Departamentos</h2>
         <MapPeru data={data} />
         <Table data={data}/>
+
+        <h2 className={styles.subtitle}>Historial de Primera Dosis</h2>
+
+        <ProgressChart
+          dataset={hist.primeraDosisAdministradas}
+          tooltip={PrimeraDosisTooltip}
+        />
+
+        <h2 className={styles.subtitle}>Historial de Segunda Dosis</h2>
+
+        <ProgressChart
+          dataset={hist.segundaDosisAdministradas}
+          tooltip={SegundaDosisTooltip}
+        />
+
       </main>
 
       <footer className={styles.footer}>
@@ -109,6 +130,9 @@ export default function Home({data}) {
         >
           Desarrollado por Renan Salazar
         </a>
+        <span>•</span>
+        <a href="https://github.com/renansalazar/covidvacunaperu"
+          target="_blank">Github</a>
       </footer>
     </div>
   )
@@ -116,10 +140,12 @@ export default function Home({data}) {
 
 export async function getStaticProps () {
   const data = require('../public/data/latest.json')
+  const hist = formatChartData()
 
   return {
     props: {
-      data
+      data,
+      hist
     }
   }
 }

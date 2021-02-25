@@ -18,6 +18,7 @@
     "react-dom": "17.0.1",
     "react-table": "^7.6.3",
     "react-tooltip": "^4.2.14",
+    "recharts": "^2.0.8",
     "topojson-client": "^3.1.0"
   }
 }
