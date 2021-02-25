@@ -1,0 +1,28 @@
+:root{
+  --main-background-color: #EFEFF3;
+  --main-border: #A1A1A1;
+  --main-box-shadow: #98ADFD;
+  --main-box-shadow-light: #B8C3ED;
+  --main-text-small-color: #55565D;
+  --main-text-color: #131315;
+  --main-title-color: #3B49D7;
+  --main-subtitle-color: #8085AF;
+
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
