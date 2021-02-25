@@ -18,10 +18,10 @@ download(url, 'public/data', { filename })
       await fs.writeJson('./public/data/hist_vacuna.json', json.jsonHist)
       await fs.writeJson('./public/data/ultimoCorte.json', { fechaCorte: json.fechaCorte, rows: json.registros })
     }
-    /* await fs.unlink('public/data/'+filename, function (err) {
+    await fs.unlink('public/data/'+filename, function (err) {
         if (err) throw err;
         console.log('File deleted!');
-    }); */
+    });
   })
   .catch(err => {
     console.error(`${url} can't be downloaded. Error:`)
