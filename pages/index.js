@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css'
 import Progress from '../components/Progress'
 import ProgressChart from '../components/ProgressChart'
 import MapPeru from '../components/MapPeru'
+import TimeAgo from '../components/TimeAgo.jsx'
 import Table from '../components/Table'
 import FormatNumber from '../components/FormatNumber'
 import FormatPercentage from '../components/FormatPercentage'
@@ -14,7 +15,7 @@ import {
   SegundaDosisTooltip
 }  from '../components/ProgressChart/tooltips'
 
-export default function Home({data, hist}) {
+export default function Home({data, hist, info}) {
   const totals = data.find(element=>element.departamento==='TOTAL')
   return (
     <div className={styles.container}>
@@ -29,7 +30,7 @@ export default function Home({data, hist}) {
         </h1>
 
         <p className={styles.description}>
-          Datos actualizados hace 4 dias. Fuente:
+          Datos actualizados hace <TimeAgo timestamp={info.fechaCorte} />. Fuente:
           {' '}
           <a href="https://www.datosabiertos.gob.pe/dataset/vacunaci%C3%B3n-contra-covid-19-ministerio-de-salud-minsa" target="__blank">Ministerio de Salud</a>
         </p>
@@ -140,12 +141,14 @@ export default function Home({data, hist}) {
 
 export async function getStaticProps () {
   const data = require('../public/data/latest.json')
+  const info = require('../public/data/ultimoCorte.json')
   const hist = formatChartData()
 
   return {
     props: {
       data,
-      hist
+      hist,
+      info
     }
   }
 }

@@ -27,13 +27,8 @@ module.exports = async function transformCsvToJson(csvFileName) {
   //Comprobacion por si se pierden registros en la descarga
   let registros = jsonFormat.length;
   if (registros >= rows) {
-    const year = (s) => s.slice(0, 4);
-    const month = (s) => s.slice(4, 6);
-    const day = (s) => s.slice(6, 8);
-
-    fechaCorte = +new Date(
-      [year(fechaCorte), month(fechaCorte), day(fechaCorte)].join("-")
-    );
+    
+    fechaCorte = +new Date();
 
     jsonFormat.forEach((element) => {
       let objDepartamento = element.departamento;
