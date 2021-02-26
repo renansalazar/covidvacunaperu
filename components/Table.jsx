@@ -43,7 +43,7 @@ const Table = ({ data }) => {
         format: toNumber
       },
       {
-        Header: "% de Poblacion con 1ra Dosis",
+        Header: "% de población con 1ra Dosis",
         accessor: "porcentajePrimeraDosis",
         format: toPercentage
       },
@@ -53,7 +53,7 @@ const Table = ({ data }) => {
         format: toNumber
       },
       {
-        Header: "% de Poblacion con 2da Dosis",
+        Header: "% de poblacion con 2da Dosis",
         accessor: "porcentajeSegundaDosis",
         format: toPercentage
       }
@@ -124,9 +124,11 @@ const Table = ({ data }) => {
                     {row.cells.map((cell, index) => {
                       return (
                         <span key={index} class={styles.cell}>
-                          {index === 0
-                            ? ''
-                            : `${headerGroups[0].headers[index].Header} : ${cell.column.format(cell.value)}`}
+                          {
+                            index === 0
+                              ? ''
+                              : `${headerGroups[0].headers[index].Header}: ${cell.column.format(cell.value)}`
+                          }
                         </span>
                       )
                     })}
