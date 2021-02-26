@@ -120,6 +120,17 @@ const Table = ({ data }) => {
                       )
                     })
                   }
+                  <td className={styles.mobileCell}>
+                    {row.cells.map((cell, index) => {
+                      return (
+                        <span key={index} class={styles.cell}>
+                          {index === 0
+                            ? ''
+                            : `${headerGroups[0].headers[index].Header} : ${cell.column.format(cell.value)}`}
+                        </span>
+                      )
+                    })}
+                  </td>
                 </tr>
               )
             })
