@@ -1,4 +1,4 @@
-name: Download latest COVID-19 Status positive
+name: Download latest COVID-19 Status vaccination
 
 on:
   workflow_dispatch:
