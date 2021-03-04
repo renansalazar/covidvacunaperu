@@ -216,7 +216,31 @@
   margin-top: 40px;
 }
 
+.buttonShare{
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  padding: 3px 10px;
+  border: 2px solid var(--main-subtitle-color);
+  border-radius: 6px;
+  background-color: #ffffff;
+  z-index: 999999;
+  font-size: .8rem;
+}
+.buttonShare span{
+  margin-right: 2px;
+  font-weight: bold;
+  display: none;
+}
+
 @media (min-width: 600px) {
+  
+  .buttonShare span{
+    display: inherit;
+  }
+
   .grid {
     grid-template-columns: repeat(3, 1fr);
     max-width: 1000px;
