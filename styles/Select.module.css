@@ -1,0 +1,15 @@
+.containerSelect{
+    margin-top: 0;
+}
+
+.select{
+    padding: 5px 10px;
+    margin-left: 5px;
+    border-radius: 6px;
+    background-color: var(--main-background-color);
+    text-transform: capitalize;
+}
+
+.select option:nth-child(1){
+    text-transform: none;
+}

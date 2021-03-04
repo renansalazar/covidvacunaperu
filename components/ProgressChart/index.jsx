@@ -1,19 +1,17 @@
 import { useRef } from 'react'
 
 import {
+  XAxis, YAxis, Tooltip, ResponsiveContainer,
   AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer
+  Area
 } from 'recharts'
+
 
 import styles from '../../styles/ProgressChart.module.css'
 import { CustomXTick, CustomYTick } from './ticks'
 import useIntersectionObserver from '../../hooks/useIntersectionObserver'
 
-export default function ProgressChart ({ dataset, tooltip: CustomTooltip }) {
+export function ProgressChart ({ dataset, tooltip: CustomTooltip }) {
   const elementRef = useRef(null)
 
   const [isVisible] = useIntersectionObserver({
@@ -25,7 +23,7 @@ export default function ProgressChart ({ dataset, tooltip: CustomTooltip }) {
   return (
     <div className={styles.chartContainer} ref={elementRef}>
       {isVisible && (
-        <div style={{ width: '100%', height: 450 }}>
+        <div style={{ width: '100%', height: 360 }}>
           <ResponsiveContainer>
             <AreaChart
               data={dataset}
@@ -41,7 +39,7 @@ export default function ProgressChart ({ dataset, tooltip: CustomTooltip }) {
                 tick={<CustomXTick />} 
               />
               <YAxis
-                domain={[0, 'dataMax + 40000']}
+                domain={[0, 'dataMax + 5000']}
                 interval='preserveStartEnd'
                 width={100}
                 scale='linear'

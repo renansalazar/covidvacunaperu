@@ -7,7 +7,13 @@
   --main-text-color: #131315;
   --main-title-color: #3B49D7;
   --main-subtitle-color: #8085AF;
+  --font-size: 14px;
+}
 
+@media (min-width: 600px){
+  :root{
+    --font-size: 16px;
+  }
 }
 
 html,
@@ -16,6 +22,7 @@ body {
   margin: 0;
   font-family: Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: var(--font-size);
 }
 
 a {
@@ -26,3 +33,4 @@ a {
 * {
   box-sizing: border-box;
 }
+

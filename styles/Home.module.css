@@ -51,6 +51,7 @@
 .title a {
   color: #0070f3;
   text-decoration: none;
+  font-size: 2.3rem; 
 }
 
 .title a:hover,
@@ -72,7 +73,7 @@
 
 .description {
   line-height: 1;
-  font-size: 1rem;
+  font-size: .9rem;
   color: var(--main-text-small-color);
 }
 
@@ -87,17 +88,18 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(323px, 1fr));
-  max-width: 1000px;
-  margin-top: .9rem;
-  width: 100%;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
+}
+
+.chartContainer{
+  grid-column: 1/span 2;
 }
 
 .card {
   align-items: center;
   border-radius: 10px;
-  border: 1px solid var(--main-border);
+  border: 2px solid var(--main-box-shadow);
   color: inherit;
   display: flex;
   flex-direction: column;
@@ -106,8 +108,33 @@
   text-align: left;
   text-decoration: none;
   transition: all 0.20s ease;
-  border-color: var(--main-box-shadow);
   box-shadow: -10px 10px 5px var(--main-box-shadow);
+}
+
+.groupRadio{
+    margin: 5px 0;
+    display: flex;
+}
+
+.groupRadio label {
+  display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: 10px 5px 10px 0;
+}
+
+.groupRadio input[type=radio]{
+  appearance: none;
+  background: #ffffff;
+  border: 2px solid var(--main-border);
+  border-radius: 500%;
+  padding: 6px;
+  outline: none;
+  margin: auto 5px;
+}
+
+.groupRadio input[type=radio]:checked{
+  background: radial-gradient(var(--main-title-color) 50%,  rgba(255, 0, 0, 0) 51%);
 }
 
 /* .card:hover,
@@ -135,6 +162,7 @@
   margin: 0;
   font-size: 2rem;
   font-weight: bold;
+  margin: 10px 0;
   line-height: 1.5;
   color: var(--main-subtitle-color)
 }
@@ -143,9 +171,9 @@
   display: flex;
   background-color: var(--main-box-shadow-light);
   width: 100%;
+  padding: 8px;
   overflow: hidden;
   border-radius: 10px 10px 0px 0px;
-  padding: 1rem;
   align-items: center;
 }
 
@@ -155,7 +183,7 @@
 }
 
 .card .cardBody{
-  margin: 20px 0;
+  margin: 0 auto;
 }
 
 .logo {
@@ -173,6 +201,8 @@
 .card small span{
   margin: auto;
   margin-left: 8px;
+  font-size: 1.1rem;
+  color: var(--main-subtitle-color);
 }
 
 .companyBrand{
@@ -180,19 +210,34 @@
 }
 
 .links{
-  margin: 20px;
   width: 100%;
   max-width: 1000px;
   text-align: center;
+  margin-top: 40px;
 }
 
-@media (max-width: 600px) {
+@media (min-width: 600px) {
   .grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1000px;
+    margin-top: .9rem;
     width: 100%;
-    flex-direction: column;
+  }
+
+  .card .cardHeader{
+    padding: 0;
+  }
+
+  .chartContainer{
+    grid-row: 1/span 2;
+    grid-column: 2/span 3;
+  }
+  
+  .card p {
+    margin:0  
   }
 
   .title {
-    font-size: 2.5rem;
+    font-size: 2.5rem; 
   }
 }

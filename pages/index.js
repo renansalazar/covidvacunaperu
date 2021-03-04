@@ -1,22 +1,48 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { useState, useMemo } from "react";
+import Head from "next/head";
+import Image from "next/image";
 
-import Progress from '../components/Progress'
-import ProgressChart from '../components/ProgressChart'
-import MapPeru from '../components/MapPeru'
-import TimeAgo from '../components/TimeAgo.jsx'
-import Table from '../components/Table'
-import FormatNumber from '../components/FormatNumber'
-import FormatPercentage from '../components/FormatPercentage'
-import formatChartData from '../components/ProgressChart/utils/format-data.js'
+import styles from "../styles/Home.module.css";
+
+import { ProgressChart } from "../components/ProgressChart";
+import Progress from "../components/Progress";
+import Select from "../components/Select";
+import MapPeru from "../components/MapPeru";
+import TimeAgo from "../components/TimeAgo.jsx";
+import Table from "../components/Table";
+import FormatNumber from "../components/FormatNumber";
+import FormatPercentage from "../components/FormatPercentage";
+import formatChartData from "../components/ProgressChart/utils/format-data.js";
 import {
   PrimeraDosisTooltip,
-  SegundaDosisTooltip
-}  from '../components/ProgressChart/tooltips'
+  SegundaDosisTooltip,
+} from "../components/ProgressChart/tooltips";
 
-export default function Home({data, hist, info}) {
-  const totals = data.find(element=>element.departamento==='TOTAL')
+export default function Home({ data, hist, info, departamentos }) {
+  const [filter, setFilter] = useState("primeraDosis");
+  const [search, setSearch] = useState("TOTAL");
+  const totals = useMemo(
+    () => data.find((element) => element.departamento === search),
+    [search]
+  );
+
+  const dataFiltrada = useMemo(
+    () =>
+      filter === "primeraDosis"
+        ? totals.porcentajePrimeraDosis
+        : totals.porcentajeSegundaDosis,
+    [filter, search]
+  );
+
+  const historico = useMemo(
+    () => search === "TOTAL"
+          ? hist[filter+"Administradas"]
+          : hist[filter+"Departamentos"].map((d) => {
+              return { name: d.name, value: d[search] };
+            }),
+    [filter, search]
+  );
+
   return (
     <div className={styles.container}>
       <Head>
@@ -25,130 +51,169 @@ export default function Home({data, hist, info}) {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Vacunación contra el COVID-19 en Perú
-        </h1>
+        <h1 className={styles.title}>Vacunación contra el COVID-19 en Perú</h1>
 
         <p className={styles.description}>
-          Datos actualizados hace <TimeAgo timestamp={info.fechaCorte} />. Fuente:
-          {' '}
-          <a href="https://www.datosabiertos.gob.pe/dataset/vacunaci%C3%B3n-contra-covid-19-ministerio-de-salud-minsa" target="__blank">Ministerio de Salud</a>
+          Datos actualizados hace <TimeAgo timestamp={info.fechaCorte} />.
+          Fuente:{" "}
+          <a
+            href="https://www.datosabiertos.gob.pe/dataset/vacunaci%C3%B3n-contra-covid-19-ministerio-de-salud-minsa"
+            target="__blank"
+          >
+            Ministerio de Salud
+          </a>
         </p>
+
+        <Select data={departamentos} onChange={setSearch} />
 
         <div className={styles.grid}>
           <div className={styles.card}>
             <div className={styles.cardHeader}>
-              <Image className={styles.imageCardHeader} src="/vaccine.png" width={70} height={70} />
+              <Image
+                className={styles.imageCardHeader}
+                src="/vaccine.png"
+                width={60}
+                height={60}
+              />
               <h3>Primera Dosis</h3>
             </div>
             <div className={styles.cardBody}>
               <p>
-                <FormatNumber>
-                  {totals.primeraDosis}
-                </FormatNumber>
+                <FormatNumber>{totals.primeraDosis}</FormatNumber>
               </p>
             </div>
             <div>
-                <small>
-                  <Image className={styles.companyBrand} src="/logo_astrazeneca.jpeg" width={100} height={26} />
-                  <span>
-                    <FormatNumber>
-                      {totals.astrazeneca}
-                    </FormatNumber>
-                  </span>
-                </small>
-                <small>
-                  <Image className={styles.companyBrand} src="/logo_pfizer.png" width={80} height={30} />
-                  <span>
-                    <FormatNumber>
-                      {totals.pfizer}
-                    </FormatNumber>
-                  </span>
-                </small>
-                <small>
-                  <Image className={styles.companyBrand} src="/logo_sinopharm.png" width={80} height={30} />
-                  <span>
-                    <FormatNumber>
-                      {totals.sinopharm}
-                    </FormatNumber>
-                  </span>
-                </small>
+              <small>
+                <Image
+                  className={styles.companyBrand}
+                  src="/logo_astrazeneca.jpeg"
+                  width={100}
+                  height={26}
+                />
+                <span>
+                  <FormatNumber>{totals.astrazeneca}</FormatNumber>
+                </span>
+              </small>
+              <small>
+                <Image
+                  className={styles.companyBrand}
+                  src="/logo_pfizer.png"
+                  width={80}
+                  height={30}
+                />
+                <span>
+                  <FormatNumber>{totals.pfizer}</FormatNumber>
+                </span>
+              </small>
+              <small>
+                <Image
+                  className={styles.companyBrand}
+                  src="/logo_sinopharm.png"
+                  width={80}
+                  height={30}
+                />
+                <span>
+                  <FormatNumber>{totals.sinopharm}</FormatNumber>
+                </span>
+              </small>
             </div>
           </div>
-         
+
           <div className={styles.card}>
             <div className={styles.cardHeader}>
-              <Image className={styles.imageCardHeader} src="/vaccineall.png" width={70} height={70} />
+              <Image
+                className={styles.imageCardHeader}
+                src="/vaccineall.png"
+                width={60}
+                height={60}
+              />
               <h3>Segunda Dosis</h3>
             </div>
             <div className={styles.cardBody}>
               <p>
-                <FormatNumber>
-                  {totals.segundaDosis}
-                </FormatNumber>
+                <FormatNumber>{totals.segundaDosis}</FormatNumber>
               </p>
             </div>
             <div className={styles.cardBody}>
-                <h4>
-                  % sobre Primera Dosis
-                </h4>
-                <p>
-                  <FormatPercentage>
-                    {totals.porcentajeSegundaDosis}
-                  </FormatPercentage>
-                </p>
+              <h4>% sobre Primera Dosis</h4>
+              <p>
+                <FormatPercentage>
+                  {totals.porcentajeSegundaDosis}
+                </FormatPercentage>
+              </p>
             </div>
           </div>
+          <div className={styles.chartContainer}>
+            <div className={styles.groupRadio}>
+              <label>
+                <input
+                  type="radio"
+                  name="typeReport"
+                  onChange={() => setFilter("primeraDosis")}
+                  checked={filter === "primeraDosis"}
+                />
+                Primera Dosis
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="typeReport"
+                  onChange={() => setFilter("segundaDosis")}
+                  checked={filter === "segundaDosis"}
+                />
+                Segunda Dosis
+              </label>
+            </div>
+            <Progress data={dataFiltrada} />
+            <ProgressChart
+              dataset={historico}
+              tooltip={
+                filter === "primeraDosis"
+                  ? PrimeraDosisTooltip
+                  : SegundaDosisTooltip
+              }
+            />
+          </div>
         </div>
-        <Progress data={totals} />
+
         <div className={styles.links}>
-          <a href="/data/latest.json" download >Descargar últimos datos en formato JSON</a>
+          <a href="/data/latest.json" download>
+            Descargar últimos datos en formato JSON
+          </a>
         </div>
-          <h2>Por Departamentos</h2>
+        <h2>Por Departamentos</h2>
         <MapPeru data={data} />
         <Table data={data}/>
-
-        <h2 className={styles.subtitle}>Historial de Primera Dosis</h2>
-
-        <ProgressChart
-          dataset={hist.primeraDosisAdministradas}
-          tooltip={PrimeraDosisTooltip}
-        />
-
-        <h2 className={styles.subtitle}>Historial de Segunda Dosis</h2>
-
-        <ProgressChart
-          dataset={hist.segundaDosisAdministradas}
-          tooltip={SegundaDosisTooltip}
-        />
-
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://github.com/renansalazar"
-          target="_blank"
-        >
+        <a href="https://github.com/renansalazar" target="_blank">
           Desarrollado por Renan Salazar
         </a>
         <span>•</span>
-        <a href="https://github.com/renansalazar/covidvacunaperu"
-          target="_blank">Github</a>
+        <a
+          href="https://github.com/renansalazar/covidvacunaperu"
+          target="_blank"
+        >
+          Github
+        </a>
       </footer>
     </div>
-  )
+  );
 }
 
-export async function getStaticProps () {
-  const data = require('../public/data/latest.json')
-  const info = require('../public/data/ultimoCorte.json')
-  const hist = formatChartData()
+export async function getStaticProps() {
+  const data = require("../public/data/latest.json");
+  const info = require("../public/data/ultimoCorte.json");
+  const hist = formatChartData();
+  const departamentos = data.map((d) => d.departamento);
 
   return {
     props: {
       data,
       hist,
-      info
-    }
-  }
+      info,
+      departamentos,
+    },
+  };
 }
