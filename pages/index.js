@@ -77,15 +77,15 @@ export default function Home({ data, hist, info, departamentos }) {
             <div className={styles.cardHeader}>
               <Image
                 className={styles.imageCardHeader}
-                src="/vaccine.png"
+                src="/map.png"
                 width={60}
                 height={60}
               />
-              <h3>Primera Dosis</h3>
+              <h3>Total de Dosis</h3>
             </div>
             <div className={styles.cardBody}>
               <p>
-                <FormatNumber>{totals.primeraDosis}</FormatNumber>
+                <FormatNumber>{totals.primeraDosis+totals.segundaDosis}</FormatNumber>
               </p>
             </div>
             <div>
@@ -124,7 +124,30 @@ export default function Home({ data, hist, info, departamentos }) {
               </small>
             </div>
           </div>
-
+          <div className={styles.card}>
+            <div className={styles.cardHeader}>
+              <Image
+                className={styles.imageCardHeader}
+                src="/vaccine.png"
+                width={60}
+                height={60}
+              />
+              <h3>Primera Dosis</h3>
+            </div>
+            <div className={styles.cardBody}>
+              <p>
+                <FormatNumber>{totals.primeraDosis}</FormatNumber>
+              </p>
+            </div>
+            <div className={styles.cardBody}>
+              <h4>% sobre total de dosis</h4>
+              <p>
+                <FormatPercentage>
+                  {totals.primeraDosis/(totals.primeraDosis+totals.segundaDosis)}
+                </FormatPercentage>
+              </p>
+            </div>
+          </div>
           <div className={styles.card}>
             <div className={styles.cardHeader}>
               <Image
@@ -141,10 +164,10 @@ export default function Home({ data, hist, info, departamentos }) {
               </p>
             </div>
             <div className={styles.cardBody}>
-              <h4>% sobre Primera Dosis</h4>
+              <h4>% sobre primera dosis</h4>
               <p>
                 <FormatPercentage>
-                  {totals.porcentajeSegundaDosis}
+                  {totals.segundaDosis/totals.primeraDosis}
                 </FormatPercentage>
               </p>
             </div>
