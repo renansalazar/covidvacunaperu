@@ -45,7 +45,7 @@ export function ProgressChart ({ dataset, tooltip: CustomTooltip }) {
                 scale='linear'
                 tick={<CustomYTick />}
               />
-              <Tooltip content={<CustomTooltip/>} />
+              <Tooltip content={<CustomTooltip data={dataset}/>} />
               <Area
                 type='monotone'
                 dataKey='value'
