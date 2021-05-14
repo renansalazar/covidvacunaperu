@@ -10,6 +10,7 @@ module.exports = async function transformCsvToJson(csvFileName) {
     } = element;
     return {
       departamento: departamento=="LIMA REGION"? "LIMA":departamento,
+      fechaResultado
     };
   });
 

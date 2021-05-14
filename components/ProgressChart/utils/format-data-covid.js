@@ -30,6 +30,8 @@ export default function formatChartData () {
     const day = (s) => s.slice(6, 8)
 
     const matrixMap = (v) => [year(v), month(v), day(v)]
+    console.log("arrFechas")
+    console.log(arrFechas)
     arrFechas = arrFechas.sort((a, b) => {
         let aa = a.fechaResultado
         let bb = b.fechaResultado
@@ -39,9 +41,7 @@ export default function formatChartData () {
         if(bb ===undefined){
             bb=fechaCorte
         }
-        console.log("vuelves")
-        console.log(aa)
-        console.log(bb)
+        
         aa = matrixMap(aa).join("-")
         bb = matrixMap(bb).join("-")
         return new Date(aa).getTime() - new Date(bb).getTime()
