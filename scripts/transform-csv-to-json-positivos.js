@@ -9,7 +9,7 @@ module.exports = async function transformCsvToJson(csvFileName) {
       FECHA_RESULTADO: fechaResultado,
     } = element;
     return {
-      departamento: departamente=="LIMA REGION"?"LIMA":departamento,
+      departamento: departamento=="LIMA REGION"? "LIMA":departamento,
     };
   });
 
