@@ -1,5 +1,5 @@
 :root{
-  --main-background-color: #EFEFF3;
+  --main-background-color: #ffffff;
   --main-border: #A1A1A1;
   --main-box-shadow: #98ADFD;
   --main-box-shadow-light: #B8C3ED;
@@ -20,6 +20,7 @@ html,
 body {
   padding: 0;
   margin: 0;
+  background-color: var(--main-background-color);
   font-family: Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-size: var(--font-size);
