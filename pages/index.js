@@ -228,12 +228,9 @@ export default function Home({ data, hist, info, departamentos }) {
 
 export async function getStaticProps() {
   const data = require("../public/data/latest.json");
-  console.log("aqui")
   const info = require("../public/data/ultimoCorte.json");
   const hist = formatChartData();
   const departamentos = data.map((d) => d.departamento);
-  console.log("aqui tambien")
-  console.log(departamentos)
 
   return {
     props: {
