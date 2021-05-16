@@ -62,7 +62,7 @@ export function SegundaDosisTooltip ({ active, payload, label, data }) {
   )
 }
 
-export function positivosCovidTooltip ({ active, payload, label, data }) {
+export function PositivosCovidTooltip ({ active, payload, label, data }) {
   if (!active) return null
 
   const value = formatNumberToLocale(payload, 'es-ES')
@@ -74,6 +74,23 @@ export function positivosCovidTooltip ({ active, payload, label, data }) {
       </p>
       <p>
         Positivos Covid: <Bold text={value} />
+      </p>
+    </div>
+  )
+}
+
+export function FallecidosCovidTooltip ({ active, payload, label, data }) {
+  if (!active) return null
+
+  const value = formatNumberToLocale(payload, 'es-ES')
+
+  return (
+    <div className={styles.chartTooltip}>
+      <p>
+        <Bold text={label} />
+      </p>
+      <p>
+        Fallecidos: <Bold text={value} />
       </p>
     </div>
   )

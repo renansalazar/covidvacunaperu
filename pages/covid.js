@@ -10,7 +10,12 @@ import Select from "../components/Select";
 import FormatNumber from "../components/FormatNumber";
 import formatChartDataPositivos from "../components/ProgressChart/utils/format-data-covid.js";
 import formatChartData from "../components/ProgressChart/utils/format-data.js";
-import { positivosCovidTooltip } from "../components/ProgressChart/tooltips";
+import { 
+  PositivosCovidTooltip,
+  FallecidosCovidTooltip,
+  PrimeraDosisTooltip,
+  SegundaDosisTooltip
+} from "../components/ProgressChart/tooltips";
 
 export default ({hist, dataVacunados, dataPositivos, histCovid, dataFallecidos, info, departamentos}) =>{
   const [search, setSearch] = useState("TOTAL");
@@ -181,25 +186,25 @@ export default ({hist, dataVacunados, dataPositivos, histCovid, dataFallecidos, 
                 <h2>Historial de Contagiados</h2>
                 <ProgressChart
                   dataset={historicoPositivos}
-                  tooltip={positivosCovidTooltip}
+                  tooltip={PositivosCovidTooltip}
                 />
                 <br/>
                 <h2>Historial de Fallecidos</h2>
                 <ProgressChart
                   dataset={historicoFallecidos}
-                  tooltip={positivosCovidTooltip}
+                  tooltip={FallecidosCovidTooltip}
                 />
                 <br/>
                 <h2>Distribución de Primera Dosis</h2>
                 <ProgressChart
                   dataset={historicoVacunacion}
-                  tooltip={positivosCovidTooltip}
+                  tooltip={PrimeraDosisTooltip}
                 />
                 <br/>
                 <h2>Distribución de Segunda Dosis</h2>
                 <ProgressChart
                   dataset={historicoVacunacionSegundaDosis}
-                  tooltip={positivosCovidTooltip}
+                  tooltip={SegundaDosisTooltip}
                 />
             </main>
         </div>
