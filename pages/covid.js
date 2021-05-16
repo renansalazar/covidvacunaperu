@@ -2,16 +2,54 @@ import {useState, useMemo} from 'react'
 import Head from "next/head";
 import Image from "next/image";
 
-import CompareChart from "../components/CompareChart"
+import { ProgressChart } from "../components/ProgressChart"
 import Header from '../components/Header'
 import styles from "../styles/Home.module.css";
 import TimeAgo from "../components/TimeAgo.jsx";
 import Select from "../components/Select";
 import FormatNumber from "../components/FormatNumber";
 import formatChartDataPositivos from "../components/ProgressChart/utils/format-data-covid.js";
+import formatChartData from "../components/ProgressChart/utils/format-data.js";
+import { positivosCovidTooltip } from "../components/ProgressChart/tooltips";
 
-export default ({dataVacunados, dataPositivos, histCovid, dataFallecidos, info, departamentos}) =>{
+export default ({hist, dataVacunados, dataPositivos, histCovid, dataFallecidos, info, departamentos}) =>{
   const [search, setSearch] = useState("TOTAL");
+
+  const historicoPositivos = useMemo(
+    () => search === "TOTAL"
+          ? histCovid.positivosCantidad
+          : histCovid.positivosDepartamentos.map((d) => {
+              return { name: d.name, value: d[search] };
+            }),
+    [search]
+  );
+
+  const historicoFallecidos = useMemo(
+    () => search === "TOTAL"
+          ? histCovid.fallecidosCantidad
+          : histCovid.fallecidosDepartamentos.map((d) => {
+              return { name: d.name, value: d[search] };
+            }),
+    [search]
+  );
+
+  const historicoVacunacion = useMemo(
+    () => search === "TOTAL"
+          ? hist.primeraDosisAdministradas
+          : hist.primeraDosisDepartamentos.map((d) => {
+              return { name: d.name, value: d[search] };
+            }),
+    [search]
+  );
+
+  const historicoVacunacionSegundaDosis = useMemo(
+    () => search === "TOTAL"
+          ? hist.segundaDosisAdministradas
+          : hist.segundaDosisDepartamentos.map((d) => {
+              return { name: d.name, value: d[search] };
+            }),
+    [search]
+  );
 
   const totalsVacunados = useMemo(
     () => dataVacunados.find((element) => element.departamento === search),
@@ -19,12 +57,12 @@ export default ({dataVacunados, dataPositivos, histCovid, dataFallecidos, info, 
   );
 
   const totalsNuevosCasos = useMemo(
-    () => histCovid.positivosCantidad[histCovid.positivosCantidad.length-1].value-histCovid.positivosCantidad[histCovid.positivosCantidad.length-2].value,
+    () => historicoPositivos[historicoPositivos.length-1].value,
     [search]
   );
 
   const totalsNuevosFallecidos = useMemo(
-    () => histCovid.fallecidosCantidad[histCovid.fallecidosCantidad.length-1].value-histCovid.fallecidosCantidad[histCovid.fallecidosCantidad.length-2].value,
+    () => historicoFallecidos[historicoFallecidos.length-1].value,
     [search]
   );
 
@@ -138,8 +176,31 @@ export default ({dataVacunados, dataPositivos, histCovid, dataFallecidos, info, 
                       </h5>
                     </div>
                   </div>
-                  
                 </div>
+                <br/>
+                <h2>Historial de Contagiados</h2>
+                <ProgressChart
+                  dataset={historicoPositivos}
+                  tooltip={positivosCovidTooltip}
+                />
+                <br/>
+                <h2>Historial de Fallecidos</h2>
+                <ProgressChart
+                  dataset={historicoFallecidos}
+                  tooltip={positivosCovidTooltip}
+                />
+                <br/>
+                <h2>Distribución de Primera Dosis</h2>
+                <ProgressChart
+                  dataset={historicoVacunacion}
+                  tooltip={positivosCovidTooltip}
+                />
+                <br/>
+                <h2>Distribución de Segunda Dosis</h2>
+                <ProgressChart
+                  dataset={historicoVacunacionSegundaDosis}
+                  tooltip={positivosCovidTooltip}
+                />
             </main>
         </div>
     )
@@ -150,7 +211,7 @@ export async function getStaticProps() {
     const dataPositivos = require("../public/data/latestPositivos.json");
     const dataFallecidos = require("../public/data/latestFallecidos.json");
     const info = require("../public/data/ultimoCorte.json");
-    //const hist = formatChartData();
+    const hist = formatChartData();
     const histCovid = formatChartDataPositivos();
     const departamentos = dataPositivos.map((d) => d.departamento);
   
@@ -159,7 +220,7 @@ export async function getStaticProps() {
         dataVacunados,
         dataPositivos,
         dataFallecidos,
-        //hist,
+        hist,
         histCovid,
         info,
         departamentos,

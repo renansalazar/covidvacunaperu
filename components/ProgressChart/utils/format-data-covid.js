@@ -56,7 +56,7 @@ export default function formatChartData () {
         let nameDataSet = [nombreFinal[2],nombreFinal[1]].join("/")
         
         const cantidad = element.departamentos.find(({departamento})=>departamento==="TOTAL").cantidad
-        acumuladorCantidad += cantidad
+        acumuladorCantidad = cantidad
         dataset.positivosCantidad.push({
             name: nameDataSet,
             value: acumuladorCantidad
@@ -66,7 +66,7 @@ export default function formatChartData () {
         arrNombreDepartamentos.forEach(el=>{
             const positivosDepartamento = element.departamentos.find(({departamento})=>departamento===el)
             if(positivosDepartamento!=undefined){
-                objPositivosCantidad[el] += positivosDepartamento.cantidad
+                objPositivosCantidad[el] = positivosDepartamento.cantidad
             }
         })
         Object.assign(objChartPositivosCantidad, objPositivosCantidad)
@@ -83,7 +83,7 @@ export default function formatChartData () {
         let nameDataSet = [nombreFinal[2],nombreFinal[1]].join("/")
         
         const cantidad = element.departamentos.find(({departamento})=>departamento==="TOTAL").cantidad
-        acumuladorFallecidosCantidad += cantidad
+        acumuladorFallecidosCantidad = cantidad
         dataset.fallecidosCantidad.push({
             name: nameDataSet,
             value: acumuladorFallecidosCantidad
@@ -93,7 +93,7 @@ export default function formatChartData () {
         arrNombreDepartamentos.forEach(el=>{
             const fallecidosDepartamento = element.departamentos.find(({departamento})=>departamento===el)
             if(fallecidosDepartamento!=undefined){
-                objFallecidosCantidad[el] += fallecidosDepartamento.cantidad
+                objFallecidosCantidad[el] = fallecidosDepartamento.cantidad
             }
         })
         Object.assign(objChartFallecidosCantidad, objFallecidosCantidad)

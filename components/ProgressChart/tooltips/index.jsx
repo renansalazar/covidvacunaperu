@@ -17,8 +17,6 @@ export function PrimeraDosisTooltip ({ active, payload, label, data }) {
   if (!active) return null
   const value = formatNumberToLocale(payload, 'es-ES')
   let indice = data.findIndex(d=>d.name===label)
-  console.log("indice")
-  console.log(indice)
   let nuevos = indice==0?data[indice].value : data[indice].value-data[indice-1].value
   //let dataFilter = data.slice(indice-6, indice+1)
   //let minimo = Math.min(...dataFilter.map(df=>df.value))
@@ -42,7 +40,29 @@ export function PrimeraDosisTooltip ({ active, payload, label, data }) {
   )
 }
 
-export function SegundaDosisTooltip ({ active, payload, label }) {
+export function SegundaDosisTooltip ({ active, payload, label, data }) {
+  if (!active) return null
+
+  const value = formatNumberToLocale(payload, 'es-ES')
+  let indice = data.findIndex(d=>d.name===label)
+  let nuevos = indice==0?data[indice].value : data[indice].value-data[indice-1].value
+
+  return (
+    <div className={styles.chartTooltip}>
+      <p>
+        <Bold text={label} />
+      </p>
+      <p>
+        Segunda Dosis: <Bold text={value} />
+      </p>
+      <p>
+        Nuevos: <Bold text={nuevos} /> 
+      </p>
+    </div>
+  )
+}
+
+export function positivosCovidTooltip ({ active, payload, label, data }) {
   if (!active) return null
 
   const value = formatNumberToLocale(payload, 'es-ES')
@@ -53,7 +73,7 @@ export function SegundaDosisTooltip ({ active, payload, label }) {
         <Bold text={label} />
       </p>
       <p>
-        Segunda Dosis: <Bold text={value} />
+        Positivos Covid: <Bold text={value} />
       </p>
     </div>
   )
