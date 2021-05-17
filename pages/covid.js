@@ -62,12 +62,12 @@ export default ({hist, dataVacunados, dataPositivos, histCovid, dataFallecidos, 
   );
 
   const totalsNuevosCasos = useMemo(
-    () => historicoPositivos[historicoPositivos.length-1].value,
+    () => historicoPositivos[historicoPositivos.length-2].value,
     [search]
   );
 
   const totalsNuevosFallecidos = useMemo(
-    () => historicoFallecidos[historicoFallecidos.length-1].value,
+    () => historicoFallecidos[historicoFallecidos.length-2].value,
     [search]
   );
 
@@ -113,7 +113,7 @@ export default ({hist, dataVacunados, dataPositivos, histCovid, dataFallecidos, 
                         <FormatNumber>{totalsPositivos.cantidad}</FormatNumber>
                       </p>
                       <p className={styles.cardBody__subtitle}>
-                        {'Últimos Contagiados: '}
+                        {'Contagiados el dia de ayer: '}
                         <FormatNumber>{totalsNuevosCasos}</FormatNumber>
                       </p>
                       <h5>
@@ -136,7 +136,7 @@ export default ({hist, dataVacunados, dataPositivos, histCovid, dataFallecidos, 
                         <FormatNumber>{totalsFallecidos.cantidad}</FormatNumber>
                       </p>
                       <p className={styles.cardBody__subtitle}>
-                        {'Últimos Fallecidos: '}
+                        {'Fallecidos el dia de ayer: '}
                         <FormatNumber>{totalsNuevosFallecidos}</FormatNumber>
                       </p>                      
                       <h5>

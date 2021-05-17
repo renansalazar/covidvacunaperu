@@ -8,11 +8,12 @@
   --main-title-color: #3B49D7;
   --main-subtitle-color: #8085AF;
   --font-size: 14px;
+  --width-aside-size: 22%;
 }
 
 @media (min-width: 600px){
   :root{
-    --font-size: 16px;
+    --font-size: 13px;
   }
 }
 

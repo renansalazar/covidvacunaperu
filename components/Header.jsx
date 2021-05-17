@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from 'next/router'
+import Image from "next/image";
 
 import styles from '../styles/Header.module.css'
 
@@ -8,6 +10,7 @@ export default () => {
     const handleOpenNavbar = () => {
         setOpenNavbar(!openNavbar)
     }
+    const {pathname} = useRouter()
     return (
         <>
             { openNavbar && <div className={styles.navbar}>
@@ -28,6 +31,35 @@ export default () => {
                     </li>
                 </ul>
             </div>}
+            <div className={styles.navbarDesktop}>
+                <div className={styles.imageNavbar}>
+                    <Link href="/">
+                        <a>
+                            <Image
+                                src="/map.png"
+                                width={60}
+                                height={60}
+                            />
+                        </a>
+                    </Link>
+                </div>
+                <ul>
+                    <li className={pathname=="/"?styles.active:""}>
+                        <Link href="/">
+                            <a>
+                                Vacunación
+                            </a>
+                        </Link>
+                    </li>
+                    <li className={pathname=="/covid"?styles.active:""}>
+                        <Link href="/covid">
+                            <a>
+                                Reportes sobre el Covid
+                            </a>
+                        </Link>
+                    </li>
+                </ul>
+            </div>
             <a className={styles.buttonShare}
                 target="__blank"
                 href="https://twitter.com/intent/tweet?text=Progreso%20de%20la%20Vacunaci&#243;n%20COVID-19%20en%20Perú.%20https://covidvacunaperu.app">
