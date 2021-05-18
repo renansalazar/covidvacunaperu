@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 import * as gtag from '../lib/gtag'
 import '../styles/globals.css'
 import SEO from '../config/seo'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
@@ -21,7 +23,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <DefaultSeo {...SEO} />
+      <Header />
       <Component {...pageProps} />
+      <Footer />
     </>
   )
 }

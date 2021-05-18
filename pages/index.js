@@ -6,6 +6,7 @@ import styles from "../styles/Home.module.css";
 
 import { ProgressChart } from "../components/ProgressChart";
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 import Progress from "../components/Progress";
 import Select from "../components/Select";
 import MapPeru from "../components/MapPeru";
@@ -50,7 +51,6 @@ export default function Home({ data, hist, info, departamentos }) {
         <title>Vacunación contra el COVID-19 en Perú</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
       <main className={styles.main}>
         <h1 className={styles.title}>Vacunación contra el COVID-19 en Perú</h1>
 
@@ -73,8 +73,8 @@ export default function Home({ data, hist, info, departamentos }) {
               <Image
                 className={styles.imageCardHeader}
                 src="/map.png"
-                width={60}
-                height={60}
+                width={40}
+                height={40}
               />
               <h3>Total de Dosis</h3>
             </div>
@@ -88,8 +88,8 @@ export default function Home({ data, hist, info, departamentos }) {
                 <Image
                   className={styles.companyBrand}
                   src="/logo_astrazeneca.jpeg"
-                  width={100}
-                  height={26}
+                  width={70}
+                  height={16}
                 />
                 <span>
                   <FormatNumber>{totals.astrazeneca}</FormatNumber>
@@ -99,8 +99,8 @@ export default function Home({ data, hist, info, departamentos }) {
                 <Image
                   className={styles.companyBrand}
                   src="/logo_pfizer.png"
-                  width={80}
-                  height={30}
+                  width={60}
+                  height={20}
                 />
                 <span>
                   <FormatNumber>{totals.pfizer}</FormatNumber>
@@ -110,8 +110,8 @@ export default function Home({ data, hist, info, departamentos }) {
                 <Image
                   className={styles.companyBrand}
                   src="/logo_sinopharm.png"
-                  width={80}
-                  height={30}
+                  width={60}
+                  height={20}
                 />
                 <span>
                   <FormatNumber>{totals.sinopharm}</FormatNumber>
@@ -124,8 +124,8 @@ export default function Home({ data, hist, info, departamentos }) {
               <Image
                 className={styles.imageCardHeader}
                 src="/vaccine.png"
-                width={60}
-                height={60}
+                width={40}
+                height={40}
               />
               <h3>Primera Dosis</h3>
             </div>
@@ -148,8 +148,8 @@ export default function Home({ data, hist, info, departamentos }) {
               <Image
                 className={styles.imageCardHeader}
                 src="/vaccineall.png"
-                width={60}
-                height={60}
+                width={40}
+                height={40}
               />
               <h3>Segunda Dosis</h3>
             </div>
@@ -209,19 +209,6 @@ export default function Home({ data, hist, info, departamentos }) {
         <MapPeru data={data} />
         <Table data={data}/>
       </main>
-
-      <footer className={styles.footer}>
-        <a href="https://github.com/renansalazar" target="_blank">
-          Desarrollado por Renan Salazar
-        </a>
-        <span>•</span>
-        <a
-          href="https://github.com/renansalazar/covidvacunaperu"
-          target="_blank"
-        >
-          Github
-        </a>
-      </footer>
     </div>
   );
 }

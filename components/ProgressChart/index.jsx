@@ -23,7 +23,7 @@ export function ProgressChart ({ dataset, tooltip: CustomTooltip }) {
   return (
     <div className={styles.chartContainer} ref={elementRef}>
       {isVisible && (
-        <div style={{ width: '100%', height: 360 }}>
+        <div style={{ width: '100%', height: 300 }}>
           <ResponsiveContainer>
             <AreaChart
               data={dataset}

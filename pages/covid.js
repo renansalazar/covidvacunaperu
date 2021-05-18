@@ -3,7 +3,6 @@ import Head from "next/head";
 import Image from "next/image";
 
 import { ProgressChart } from "../components/ProgressChart"
-import Header from '../components/Header'
 import styles from "../styles/Home.module.css";
 import TimeAgo from "../components/TimeAgo.jsx";
 import Select from "../components/Select";
@@ -87,7 +86,6 @@ export default ({hist, dataVacunados, dataPositivos, histCovid, dataFallecidos, 
                 <title>Reportes sobre el Covid en Perú</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header />
             <main className={styles.main}>
                 <h1 className={styles.title}>Reportes sobre el COVID-19 en Perú</h1>
 
@@ -103,8 +101,8 @@ export default ({hist, dataVacunados, dataPositivos, histCovid, dataFallecidos, 
                       <Image
                         className={styles.imageCardHeader}
                         src="/map.png"
-                        width={60}
-                        height={60}
+                        width={40}
+                        height={40}
                       />
                       <h3>Contagiados</h3>
                     </div>
@@ -126,8 +124,8 @@ export default ({hist, dataVacunados, dataPositivos, histCovid, dataFallecidos, 
                       <Image
                         className={styles.imageCardHeader}
                         src="/map.png"
-                        width={60}
-                        height={60}
+                        width={40}
+                        height={40}
                       />
                       <h3>Fallecidos</h3>
                     </div>
@@ -149,8 +147,8 @@ export default ({hist, dataVacunados, dataPositivos, histCovid, dataFallecidos, 
                     <Image
                       className={styles.imageCardHeader}
                       src="/map.png"
-                      width={60}
-                      height={60}
+                      width={40}
+                      height={40}
                     />
                       <h3>Vacunación</h3>
                     </div>
@@ -162,8 +160,8 @@ export default ({hist, dataVacunados, dataPositivos, histCovid, dataFallecidos, 
                         <Image
                           className={styles.imageCardHeader}
                           src="/vaccine.png"
-                          width={40}
-                          height={40}
+                          width={26}
+                          height={26}
                         />
                         <FormatNumber>{totalsVacunados.primeraDosis}</FormatNumber>
                       </p>
@@ -171,8 +169,8 @@ export default ({hist, dataVacunados, dataPositivos, histCovid, dataFallecidos, 
                         <Image
                           className={styles.imageCardHeader}
                           src="/vaccineall.png"
-                          width={40}
-                          height={40}
+                          width={20}
+                          height={20}
                         />
                         <FormatNumber>{totalsVacunados.segundaDosis}</FormatNumber>
                       </p>
