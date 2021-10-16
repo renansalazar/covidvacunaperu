@@ -1,6 +1,6 @@
 # Vacunación COVID-19 en Perú
 
-[![Download latest COVID-19 Status vaccination](https://github.com/renansalazar/covidvacunaperu/actions/workflows/download-status.yml/badge.svg)](https://github.com/renansalazar/covidvacunaperu/actions/workflows/download-status.yml)
+***Este repositorio se dejo de actualizar y por lo tanto cuenta con datos desactualizados***
 
 Página Web que muestra el seguimiento de la vacunación contra el COVID-19 en Perú. Este proyecto esta inspirado en el [proyecto de midudev: https://covid-vacuna.app/](https://github.com/midudev/covid-vacuna)
 
